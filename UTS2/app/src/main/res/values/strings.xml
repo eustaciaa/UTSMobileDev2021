@@ -2,4 +2,7 @@
     <string name="app_name">Cue!</string>
     <string name="profile">Profile</string>
     <string name="login">Login</string>
+    <string name="login_message">Welcome\nback.</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        btnLogin = findViewById(R.id.login);
-        btnProfile = findViewById(R.id.profile);
+        btnLogin = (Button) findViewById(R.id.login);
+        btnProfile = (Button) findViewById(R.id.profile);
 
         btnProfile.setOnClickListener(new View.OnClickListener(){
             @Override
