@@ -44,18 +44,22 @@ public class SongListingActivity extends AppCompatActivity {
     MediaMetadataRetriever metaRetriver;
     byte[] byteCover;
 
+    LinearLayout back_dim_layout;
     Button btnOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getPermission();
         setContentView(R.layout.activity_song_listing);
+        getPermission();
+
+        back_dim_layout = (LinearLayout) findViewById(R.id.musiclist);
 
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_window, null);
+
         btnOk = popupView.findViewById(R.id.ok);
 
         // create the popup window
@@ -68,6 +72,7 @@ public class SongListingActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 popupWindow.showAtLocation(findViewById(R.id.musiclist), Gravity.CENTER, 0, 0);
+                back_dim_layout.setAlpha((float) 0.5);
             }
         }, 1000);
 
@@ -75,17 +80,9 @@ public class SongListingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 popupWindow.dismiss();
+                back_dim_layout.setAlpha((float) 1);
             }
         });
-
-        rvSongList = (RecyclerView) findViewById(R.id.recyclerView);
-        rvSongList.setHasFixedSize(true);
-        if(!(songList.size() < 1)){
-            Log.w("songList size is not fewer than 1", "true");
-            mAdapter = new SongListAdapter(this, songList);
-            rvSongList.setAdapter(mAdapter);
-            rvSongList.setLayoutManager(new LinearLayoutManager(this));
-        }
     }
 
     public static ArrayList<Song> fillSongList(Context context){
@@ -140,6 +137,15 @@ public class SongListingActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show();
             songList = fillSongList(this);
+
+            rvSongList = (RecyclerView) findViewById(R.id.recyclerView);
+            rvSongList.setHasFixedSize(true);
+            if(!(songList.size() < 1)){
+                Log.w("songList size is not fewer than 1", "true");
+                mAdapter = new SongListAdapter(this, songList);
+                rvSongList.setAdapter(mAdapter);
+                rvSongList.setLayoutManager(new LinearLayoutManager(this));
+            }
         }
     }
 
@@ -150,6 +156,15 @@ public class SongListingActivity extends AppCompatActivity {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show();
                 songList = fillSongList(this);
+
+                rvSongList = (RecyclerView) findViewById(R.id.recyclerView);
+                rvSongList.setHasFixedSize(true);
+                if(!(songList.size() < 1)){
+                    Log.w("songList size is not fewer than 1", "true");
+                    mAdapter = new SongListAdapter(this, songList);
+                    rvSongList.setAdapter(mAdapter);
+                    rvSongList.setLayoutManager(new LinearLayoutManager(this));
+                }
             }
             else{
                 ActivityCompat.requestPermissions(SongListingActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},

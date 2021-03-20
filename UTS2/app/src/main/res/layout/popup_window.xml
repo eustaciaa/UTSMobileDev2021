@@ -8,7 +8,8 @@
     android:background="@drawable/gradient_stroke_window"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:paddingVertical="30dp">
+    android:paddingVertical="30dp"
+    android:id="@+id/popupWindow">
 
     <TextView
         android:layout_width="wrap_content"

@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+                // JANGAN LUPA GANTI SONGLISTINGACTIVITY JADI LOGINACTIVITY
+//                Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intentLogin = new Intent(MainActivity.this, SongListingActivity.class);
                 startActivityForResult(intentLogin, 1);
             }
         });
