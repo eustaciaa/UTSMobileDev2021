@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if(edtUsername.getText().toString().equals(username_valid) == true && edtPassword.getText().toString().hashCode() == password_valid) {
-                    Intent intentMusicListing = new Intent(LoginActivity.this, MusicListingActivity.class);
+                    Intent intentMusicListing = new Intent(LoginActivity.this, SongListingActivity.class);
                     startActivityForResult(intentMusicListing, 1);
                 }
                 else{

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-public class MusicListingActivity extends AppCompatActivity {
+public class SongListingActivity extends AppCompatActivity {
 
     Button btnOk;
 
@@ -22,10 +22,6 @@ public class MusicListingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_listing);
-
-//        final LayoutInflater factory = getLayoutInflater();
-//        final View textEntryView = factory.inflate(R.layout.popup_window, null);
-//        btnOk = (Button) textEntryView.findViewById(R.id.ok);
 
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
@@ -39,27 +35,12 @@ public class MusicListingActivity extends AppCompatActivity {
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-//        // show the popup window
-//        // which view you pass in doesn't matter, it is only used for the window tolken
-//        popupWindow.showAtLocation(findViewById(R.id.musiclist), Gravity.CENTER, 0, 0);
-
-        //        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        PopupWindow popupWindow = new PopupWindow(inflater.inflate(R.layout.popup_window, null, false), 100, 100, true);
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 popupWindow.showAtLocation(findViewById(R.id.musiclist), Gravity.CENTER, 0, 0);
             }
         }, 100);
-
-        // dismiss the popup window when touched
-//        popupView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                popupWindow.dismiss();
-//                return true;
-//            }
-//        });
 
         btnOk.setOnClickListener(new View.OnClickListener(){
             @Override
