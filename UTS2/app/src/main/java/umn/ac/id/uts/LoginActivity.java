@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivityForResult(intentMusicListing, 1);
                 }
                 else{
+                    Toast.makeText(getApplicationContext(), "The username and password combination is not valid", Toast.LENGTH_LONG).show();
                     Log.d("LoginFailed","username and password combination is not valid");
                 }
             }
