@@ -25,16 +25,16 @@ public class MainActivity extends AppCompatActivity {
         btnProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intentMenuA = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivityForResult(intentMenuA, 1);
+                Intent intentProfile = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivityForResult(intentProfile, 1);
             }
         });
 
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intentMenuA = new Intent(MainActivity.this, LoginActivity.class);
-                startActivityForResult(intentMenuA, 1);
+                Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+                startActivityForResult(intentLogin, 1);
             }
         });
     }

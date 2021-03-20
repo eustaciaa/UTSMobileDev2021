@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
     EditText edtUsername, edtPassword;
+    String username_valid = "uasmobile";
+    Integer password_valid = -1058311594;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intentMenuA = new Intent(LoginActivity.this, MusicListingActivity.class);
-                startActivityForResult(intentMenuA, 1);
+                if(edtUsername.getText().toString().equals(username_valid) == true && edtPassword.getText().toString().hashCode() == password_valid) {
+                    Intent intentMusicListing = new Intent(LoginActivity.this, MusicListingActivity.class);
+                    startActivityForResult(intentMusicListing, 1);
+                }
+                else{
+                    Log.d("LoginFailed","username and password combination is not valid");
+                }
             }
         });
     }
