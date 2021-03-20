@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="200dp"
+    android:layout_marginHorizontal="80dp"
+    android:background="@drawable/gradient_stroke_window"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingVertical="30dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textSize="22sp"
+        android:text="@string/welcome"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:textSize="15sp"
+        android:text="@string/name"
+        android:textColor="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="35dp"
+        android:textSize="15sp"
+        android:text="@string/nim"
+        android:textColor="@android:color/darker_gray"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_fill_button"
+        android:text="@string/ok"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+</LinearLayout>

@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Cue!</string>
+
     <string name="profile">Profile</string>
     <string name="login">Login</string>
     <string name="login_message">Welcome\nback.</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+
+    <string name="welcome">Welcome!</string>
+    <string name="name">Clara Margery Eustacia</string>
+    <string name="nim">00000028297</string>
+
+    <string name="ok">Okay</string>
 </resources>
