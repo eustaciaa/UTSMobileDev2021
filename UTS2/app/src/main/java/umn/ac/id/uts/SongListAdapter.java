@@ -3,6 +3,7 @@ package umn.ac.id.uts;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -15,6 +16,8 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -45,6 +48,14 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ItemSo
         holder.tvTitle.setText(mSongList.getTitle());
         holder.tvArtist.setText(mSongList.getSinger());
         holder.tvAlbum.setText(mSongList.getAlbum());
+
+        byte[] cover = getCover(mSongList.getPath());
+        if(cover != null){
+            Glide.with(mContext).asBitmap().load(cover).into(holder.imageBox);
+        }
+        else{
+            Glide.with(mContext).asBitmap().load(R.drawable.grey).into(holder.imageBox);
+        }
 //        holder.imageBox.setImageBitmap(mSumberVideo.getCover());
     }
 
@@ -66,7 +77,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ItemSo
             mAdapter = adapter;
             imageBox = (ImageView) itemView.findViewById(R.id.songImageBox);
             tvTitle = (TextView) itemView.findViewById(R.id.songTitle);
-            tvArtist = (TextView) itemView.findViewById(R.id.songSinger);
+            tvArtist = (TextView) itemView.findViewById(R.id.songArtist);
             tvAlbum = (TextView) itemView.findViewById(R.id.songAlbum);
             itemView.setOnClickListener(this);
         }
@@ -81,5 +92,13 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ItemSo
 //            detilInten.putExtras(bundle);
 //            mContext.startActivity(detilInten);
         }
+    }
+
+    private byte[] getCover(String uri){
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(uri);
+        byte[] cover = mmr.getEmbeddedPicture();
+        mmr.release();
+        return cover;
     }
 }
