@@ -84,13 +84,8 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ItemSo
 
         @Override
         public void onClick(View v) {
-//            mPosition = getLayoutPosition();
-//            mSong = mDaftarVideo.get(mPosisi);
-//            Intent detilInten = new Intent(mContext, DetilVideoActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("DetilVideo", mSumberVideo);
-//            detilInten.putExtras(bundle);
-//            mContext.startActivity(detilInten);
+            Intent intentPlayer = new Intent(mContext, SongPlayerActivity.class);
+            mContext.startActivity(intentPlayer);
         }
     }
 
