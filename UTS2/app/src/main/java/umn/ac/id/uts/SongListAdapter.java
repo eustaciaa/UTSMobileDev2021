@@ -48,6 +48,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ItemSo
         holder.tvTitle.setText(mSongList.getTitle());
         holder.tvArtist.setText(mSongList.getSinger());
         holder.tvAlbum.setText(mSongList.getAlbum());
+        holder.mPosition = position;
 
         byte[] cover = getCover(mSongList.getPath());
         if(cover != null){
@@ -85,6 +86,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ItemSo
         @Override
         public void onClick(View v) {
             Intent intentPlayer = new Intent(mContext, SongPlayerActivity.class);
+            intentPlayer.putExtra("position", mPosition);
             mContext.startActivity(intentPlayer);
         }
     }

@@ -35,7 +35,7 @@ import java.util.LinkedList;
 public class SongListingActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1;
-    static ArrayList<Song> songList = new ArrayList<>();
+    public static ArrayList<Song> songList = new ArrayList<>();
 
     RecyclerView rvSongList;
     SongListAdapter mAdapter;
