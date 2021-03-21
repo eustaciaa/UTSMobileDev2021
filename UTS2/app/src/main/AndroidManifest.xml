@@ -10,7 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.UTS">
+        android:theme="@style/Theme.UTS"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true">
+
         <activity android:name=".SongPlayerActivity"></activity>
         <activity android:name=".SongListingActivity" />
         <activity

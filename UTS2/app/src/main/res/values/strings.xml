@@ -3,6 +3,7 @@
 
     <string name="profile">Profile</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="login_message">Welcome\nback.</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -10,10 +11,16 @@
     <string name="welcome">Welcome!</string>
     <string name="name">Clara Margery Eustacia</string>
     <string name="nim">00000028297</string>
+    <string name="kelas">BL</string>
 
     <string name="ok">Okay</string>
 
     <string name="songs">Songs</string>
-
     <string name="playingFrom">PLAYING FROM</string>
+
+    <string name="reference">References</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="tutorialLink">https://youtube.com/playlist?list=PLwQLA73lSe1RfjMzbRLoIkcIJBu25FnVJ</string>
+    <string name="colorPalette">Themes\' colour</string>
+    <string name="colorSource">Inspired by BTS\'s Love Yourself 結 \'Answer\' Album Art</string>
 </resources>

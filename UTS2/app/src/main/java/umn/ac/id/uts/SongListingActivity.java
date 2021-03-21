@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
@@ -23,9 +24,12 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -39,6 +43,7 @@ public class SongListingActivity extends AppCompatActivity {
 
     RecyclerView rvSongList;
     SongListAdapter mAdapter;
+    PopupMenu popup;
 
     AssetFileDescriptor afd;
     MediaMetadataRetriever metaRetriver;
@@ -86,21 +91,6 @@ public class SongListingActivity extends AppCompatActivity {
     }
 
     public static ArrayList<Song> fillSongList(Context context){
-//        metaRetriver = new MediaMetadataRetriever();
-//        metaRetriver.setDataSource(getResources().openRawResourceFd(R.raw.bibi_kazino).getFileDescriptor());
-//        try {
-//            byteCover = metaRetriver.getEmbeddedPicture();
-//            songList.add(new Song(
-//                            metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-//                            metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
-//                            metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION),
-//                            metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
-//                            BitmapFactory.decodeByteArray(byteCover, 0, byteCover.length)
-//            ));
-////            Bitmap songImage = BitmapFactory.decodeByteArray(byteCover, 0, byteCover.length);
-//        } catch (Exception e) {
-//            songList.add(new Song("Unknown Title", "Unknown Artist", "Unknown Duration", "Unknown Album", BitmapFactory.decodeResource(getResources(), R.drawable.grey)));
-//        }
         ArrayList<Song> tempSongList = new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {
@@ -171,5 +161,30 @@ public class SongListingActivity extends AppCompatActivity {
                         REQUEST_CODE);
             }
         }
+    }
+
+    public void showPopup(View v) {
+        popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.more_menu, popup.getMenu());
+        popup.show();
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.profile_menu:
+                        Intent intentProfile = new Intent(SongListingActivity.this, ProfileActivity.class);
+                        startActivityForResult(intentProfile, 1);
+                        return true;
+                    case R.id.logout_menu:
+                        Intent intentMain = new Intent(SongListingActivity.this, MainActivity.class);
+                        startActivityForResult(intentMain, 1);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 }
