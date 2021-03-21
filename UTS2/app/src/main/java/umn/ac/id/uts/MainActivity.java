@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 // JANGAN LUPA GANTI SONGLISTINGACTIVITY JADI LOGINACTIVITY
-//                Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
-                Intent intentLogin = new Intent(MainActivity.this, SongListingActivity.class);
+                Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+//                Intent intentLogin = new Intent(MainActivity.this, SongListingActivity.class);
                 startActivityForResult(intentLogin, 1);
             }
         });

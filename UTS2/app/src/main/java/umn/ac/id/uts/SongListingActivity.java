@@ -73,11 +73,15 @@ public class SongListingActivity extends AppCompatActivity {
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+        Intent intent = getIntent();
+        String isLoginActivity = intent.getStringExtra("isLoginActivity");
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                popupWindow.showAtLocation(findViewById(R.id.musiclist), Gravity.CENTER, 0, 0);
-                back_dim_layout.setAlpha((float) 0.5);
+                if(isLoginActivity.equals("1")) {
+                    popupWindow.showAtLocation(findViewById(R.id.musiclist), Gravity.CENTER, 0, 0);
+                    back_dim_layout.setAlpha((float) 0.5);
+                }
             }
         }, 1000);
 
@@ -125,7 +129,7 @@ public class SongListingActivity extends AppCompatActivity {
                     REQUEST_CODE);
         }
         else{
-            Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show();
             songList = fillSongList(this);
 
             rvSongList = (RecyclerView) findViewById(R.id.recyclerView);

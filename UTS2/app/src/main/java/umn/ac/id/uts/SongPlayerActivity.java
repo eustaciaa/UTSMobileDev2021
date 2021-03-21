@@ -2,12 +2,14 @@ package umn.ac.id.uts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 
 import static umn.ac.id.uts.SongListingActivity.songList;
 
-public class SongPlayerActivity extends AppCompatActivity {
+public class SongPlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     TextView tvTitle, tvArtist, tvAlbum, tvDurationPlayed, tvDurationTotal;
     ImageView ivCover, ivNextBtn, ivPrevBtn, ivBackBtn, ivShufBtn, ivReptBtn;
@@ -57,6 +59,7 @@ public class SongPlayerActivity extends AppCompatActivity {
         getIntentMethod();
 
         setTitleAndArtist(position);
+        mediaPlayer.setOnCompletionListener(this);
 
         skbrDuration.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -86,6 +89,31 @@ public class SongPlayerActivity extends AppCompatActivity {
                     tvDurationPlayed.setText(formattedTime(currentPosition));
                 }
                 handler.postDelayed(this, 1000);
+            }
+        });
+
+        ivBackBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(mediaPlayer.isPlaying()){
+                    playPauseBtn.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                    mediaPlayer.pause();
+                    skbrDuration.setMax(mediaPlayer.getDuration() / 1000);
+
+                    SongPlayerActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(mediaPlayer != null){
+                                int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                                skbrDuration.setProgress(currentPosition);
+                            }
+                            handler.postDelayed(this, 1000);
+                        }
+                    });
+                }
+                Intent intentSongListing = new Intent(SongPlayerActivity.this, SongListingActivity.class);
+                intentSongListing.putExtra("isLoginActivity","0");
+                startActivityForResult(intentSongListing, 1);
             }
         });
     }
@@ -142,8 +170,9 @@ public class SongPlayerActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000);
                 }
             });
+            mediaPlayer.setOnCompletionListener(this);
 
-            playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_24);
+            playPauseBtn.setBackgroundResource(R.drawable.ic_baseline_pause_24);
             mediaPlayer.start();
         }
         else
@@ -168,9 +197,10 @@ public class SongPlayerActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000);
                 }
             });
+            mediaPlayer.setOnCompletionListener(this);
 
-            playPauseBtn.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-            mediaPlayer.start();
+            playPauseBtn.setBackgroundResource(R.drawable.ic_baseline_play_arrow_24);
+//            mediaPlayer.start();
         }
     }
 
@@ -212,8 +242,9 @@ public class SongPlayerActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000);
                 }
             });
+            mediaPlayer.setOnCompletionListener(this);
 
-            playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_24);
+            playPauseBtn.setBackgroundResource(R.drawable.ic_baseline_pause_24);
             mediaPlayer.start();
         }
         else
@@ -238,9 +269,10 @@ public class SongPlayerActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000);
                 }
             });
+            mediaPlayer.setOnCompletionListener(this);
 
-            playPauseBtn.setImageResource(R.drawable.ic_baseline_play_arrow_24);
-            mediaPlayer.start();
+            playPauseBtn.setBackgroundResource(R.drawable.ic_baseline_play_arrow_24);
+//            mediaPlayer.start();
         }
     }
 
@@ -348,6 +380,16 @@ public class SongPlayerActivity extends AppCompatActivity {
         }
         else{
             Glide.with(this).asBitmap().load(R.drawable.grey).into(ivCover);
+        }
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        nextBtnClicked();
+        if(mediaPlayer != null){
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(this);
         }
     }
 }
